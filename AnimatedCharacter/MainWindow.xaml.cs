@@ -122,7 +122,8 @@ namespace AnimatedCharacter
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.DragMove();
+            if (e.LeftButton == MouseButtonState.Pressed)
+                this.DragMove();
         }
 
         private void OnFrame(object sender, EventArgs e)
