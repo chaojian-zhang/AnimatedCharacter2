@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>disable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>miku.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="AnimationAssets\MikuPopSpriteTrans.png" />
+    <None Remove="AnimationAssets\Sanji.png" />
+    <None Remove="AnimationAssets\Sanji2.png" />
+    <None Remove="AnimationAssets\SanjiSequence.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="miku.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="AnimationAssets\MikuPopSpriteTrans.png" />
+    <EmbeddedResource Include="AnimationAssets\SanjiSequence.txt" />
+    <EmbeddedResource Include="AnimationAssets\Sanji.png" />
+    <EmbeddedResource Include="AnimationAssets\Sanji2.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+  </ItemGroup>
+
+</Project>
