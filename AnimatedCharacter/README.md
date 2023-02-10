@@ -9,7 +9,7 @@ namespace AnimatedCharacter
 {
     internal static class OpenAIKey
     {
-        public static string Context = @"<Your Application Specific Introduction Paragraph, Can be Empty, Don't Leave it as Null>";
+        public static string AdditionalContext = @"<Your Application Specific Introduction Paragraph, Can be Empty, Don't Leave it as Null>";
         public static string Key = @"<Your Open AI Key String>";
     }
 }

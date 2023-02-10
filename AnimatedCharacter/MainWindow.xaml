@@ -5,9 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AnimatedCharacter"
         mc:Ignorable="d"
-        Title="AnimationCharacter" AllowsTransparency="True" WindowStyle="None" MouseDown="Window_MouseDown"
+        Title="AnimationCharacter" 
+        AllowsTransparency="True" WindowStyle="None" 
+        MouseDown="Window_MouseDown"
         SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen"
-        MaxWidth="500" MaxHeight="500" MouseEnter="Window_MouseEnter" MouseLeave="Window_MouseLeave" Background="{x:Null}" Topmost="True" ShowInTaskbar="False">
+        MaxWidth="500" MaxHeight="500" MouseEnter="Window_MouseEnter" MouseLeave="Window_MouseLeave" 
+        Background="{x:Null}" Topmost="True" ShowInTaskbar="False">
     <Grid Background="#01000000">
         <Button x:Name="CloseButton" Content="❌" Width="20" Height="20" FontSize="10" Visibility="Hidden" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFB4B4B4" Padding="0" Click="Button_Click"/>
         <Image x:Name="SpriteImage" Stretch="None" Margin="0, 22, 22, 0"/>

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using AnimatedCharacter.PopUps;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -12,11 +14,18 @@ namespace AnimatedCharacter
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static string DefaultContent = """
+            Question: What's your name?
+            Reply: My name is Miku.
+            Question: What do you like?
+            Reply: I like hiking.
+            """;
         public MainWindow()
         {
             InitializeComponent();
-
             InitializeAnimations();
+
+            DelayedHelper.DoDelay(2, () => DialoguePopUp.Show("Hi, how are you?", new System.Numerics.Vector2((float)Left, (float)Top)));
         }
         public void InitializeAnimations()
         {
@@ -65,7 +74,7 @@ namespace AnimatedCharacter
             FrameTimer.Start();
         }
 
-        #region Helper Functions
+        #region Helpers
         private BitmapSource[] LoadCompositeAnimation(System.Drawing.Bitmap imageFile, int spriteWidth, int spriteHeight, List<Point> locations)
         {
             return locations.Select(l => CropImage(imageFile, (int)l.X, (int)l.Y, spriteWidth, spriteHeight)).ToArray();
@@ -120,12 +129,25 @@ namespace AnimatedCharacter
         {
             this.Close();
         }
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        private async void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
                 this.DragMove();
+            else if (e.RightButton == MouseButtonState.Pressed)
+            {
+                string message = PromptDialog.Prompt("Enter input: ", "Say Something");
+                if (message != null)
+                {
+                    string contextualInput = 
+                        DefaultContent + Environment.NewLine 
+                        + OpenAIKey.AdditionalContext + Environment.NewLine 
+                        + $"Question: {message}";
+                    string reply = await CompletionHelpers.Complete(contextualInput.Trim());
+                    reply = Regex.Replace(reply, @"^[Rr]eply", string.Empty);
+                    DialoguePopUp.Show(reply, new System.Numerics.Vector2((float)Left, (float)Top));
+                }
+            }
         }
-
         private void OnFrame(object sender, EventArgs e)
         {
             SpriteImage.Source = CurrentAnimation[CurrentFrameCount];
@@ -138,7 +160,6 @@ namespace AnimatedCharacter
                 CurrentFrameCount = 0;
             }
         }
-
         private void Window_MouseEnter(object sender, MouseEventArgs e)
         {
             CloseButton.Visibility = Visibility.Visible;
