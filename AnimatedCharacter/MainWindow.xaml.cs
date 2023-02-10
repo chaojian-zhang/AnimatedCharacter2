@@ -139,11 +139,11 @@ namespace AnimatedCharacter
                 if (message != null)
                 {
                     string contextualInput = 
-                        DefaultContent + Environment.NewLine 
-                        + OpenAIKey.AdditionalContext + Environment.NewLine 
+                        (DefaultContent + Environment.NewLine 
+                        + OpenAIKey.AdditionalContext).Trim() + Environment.NewLine 
                         + $"Question: {message}";
                     string reply = await CompletionHelpers.Complete(contextualInput.Trim());
-                    reply = Regex.Replace(reply, @"^[Rr]eply", string.Empty);
+                    reply = Regex.Replace(reply, @"^[Rr]eply: ", string.Empty);
                     DialoguePopUp.Show(reply, new System.Numerics.Vector2((float)Left, (float)Top));
                 }
             }
