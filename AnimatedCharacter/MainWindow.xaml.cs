@@ -138,9 +138,11 @@ namespace AnimatedCharacter
                 string message = PromptDialog.Prompt("Enter input: ", "Say Something");
                 if (message != null)
                 {
-                    string contextualInput = 
-                        (DefaultContent + Environment.NewLine 
-                        + OpenAIKey.AdditionalContext).Trim() + Environment.NewLine 
+                    string[] contexts = new string[] { OpenAIKey.Prelude, DefaultContent.Trim(), OpenAIKey.AdditionalContext.Trim() }
+                        .Where(s => !string.IsNullOrWhiteSpace(s))
+                        .ToArray();
+                    string contextualInput = string.Join(Environment.NewLine, contexts)
+                        + Environment.NewLine 
                         + $"Question: {message}";
                     string reply = await CompletionHelpers.Complete(contextualInput.Trim());
                     reply = Regex.Replace(reply, @"^[Rr]eply: ", string.Empty);

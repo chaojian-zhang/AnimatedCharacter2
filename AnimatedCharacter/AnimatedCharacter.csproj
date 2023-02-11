@@ -6,6 +6,7 @@
     <Nullable>disable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>miku.ico</ApplicationIcon>
+    <AssemblyName>Miku</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
