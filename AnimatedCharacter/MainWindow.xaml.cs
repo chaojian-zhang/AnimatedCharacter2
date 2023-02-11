@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -134,21 +135,7 @@ namespace AnimatedCharacter
             if (e.LeftButton == MouseButtonState.Pressed)
                 this.DragMove();
             else if (e.RightButton == MouseButtonState.Pressed)
-            {
-                string message = PromptDialog.Prompt("Enter input: ", "Say Something");
-                if (message != null)
-                {
-                    string[] contexts = new string[] { OpenAIKey.Prelude, DefaultContent.Trim(), OpenAIKey.AdditionalContext.Trim() }
-                        .Where(s => !string.IsNullOrWhiteSpace(s))
-                        .ToArray();
-                    string contextualInput = string.Join(Environment.NewLine, contexts)
-                        + Environment.NewLine 
-                        + $"Question: {message}";
-                    string reply = await CompletionHelpers.Complete(contextualInput.Trim());
-                    reply = Regex.Replace(reply, @"^[Rr]eply: ", string.Empty);
-                    DialoguePopUp.Show(reply, new System.Numerics.Vector2((float)Left, (float)Top));
-                }
-            }
+                await HandleInputMessage();
         }
         private void OnFrame(object sender, EventArgs e)
         {
@@ -183,5 +170,30 @@ namespace AnimatedCharacter
         Random Rnd;
         #endregion
 
+        #region Routines
+        private async Task HandleInputMessage()
+        {
+            string message = PromptDialog.Prompt("Enter input: ", "Say Something");
+            if (message != null)
+            {
+                string[] contexts = new string[] { OpenAIKey.Prelude, DefaultContent.Trim(), OpenAIKey.AdditionalContext.Trim() }
+                    .Where(s => !string.IsNullOrWhiteSpace(s))
+                    .ToArray();
+                string contextualInput = string.Join(Environment.NewLine, contexts)
+                    + Environment.NewLine
+                    + $"Question: {message}";
+                try
+                {
+                    string reply = await CompletionHelpers.Complete(contextualInput.Trim());
+                    reply = Regex.Replace(reply, @"^[Rr]eply: ", string.Empty);
+                    DialoguePopUp.Show(reply, new System.Numerics.Vector2((float)Left, (float)Top));
+                }
+                catch (Exception e)
+                {
+                    DialoguePopUp.Show($"An error occured when trying to make a reply: {e.Message}", new System.Numerics.Vector2((float)Left, (float)Top));
+                }
+            }
+        }
+        #endregion
     }
 }

@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AnimatedCharacter.PopUps"
         mc:Ignorable="d"
-        SizeToContent="WidthAndHeight"
+        SizeToContent="WidthAndHeight" MaxWidth="250"
         AllowsTransparency="True" WindowStyle="None" Topmost="True" ResizeMode="NoResize"
         Background="{x:Null}" ShowInTaskbar="False">
     <Grid>
         <Ellipse Fill="AliceBlue" StrokeThickness="1" Stroke="Black"/>
         <TextBlock Name="Text" 
-                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"
                    Margin="20 10">
             Hello World!
         </TextBlock>
