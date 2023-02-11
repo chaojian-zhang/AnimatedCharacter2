@@ -15,12 +15,16 @@ namespace AnimatedCharacter
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Default Context
         public static string DefaultContent = """
             Question: What's your name?
             Reply: My name is Miku.
             Question: What do you like?
             Reply: I like hiking.
             """;
+        #endregion
+
+        #region Constructor
         public MainWindow()
         {
             InitializeComponent();
@@ -74,6 +78,11 @@ namespace AnimatedCharacter
             FrameTimer.Interval = TimeSpan.FromSeconds(1.0 / 24.0); // Fixed framerate for now
             FrameTimer.Start();
         }
+        #endregion
+
+        #region Properties
+        public List<string> ConversationMessages = new List<string>();
+        #endregion
 
         #region Helpers
         private BitmapSource[] LoadCompositeAnimation(System.Drawing.Bitmap imageFile, int spriteWidth, int spriteHeight, List<Point> locations)
@@ -135,7 +144,10 @@ namespace AnimatedCharacter
             if (e.LeftButton == MouseButtonState.Pressed)
                 this.DragMove();
             else if (e.RightButton == MouseButtonState.Pressed)
-                await HandleInputMessage();
+            {
+                string message = PromptDialog.Prompt("Enter input: ", "Say Something");
+                await HandleInputMessage(message);
+            }
         }
         private void OnFrame(object sender, EventArgs e)
         {
@@ -171,22 +183,27 @@ namespace AnimatedCharacter
         #endregion
 
         #region Routines
-        private async Task HandleInputMessage()
+        private async Task HandleInputMessage(string message)
         {
-            string message = PromptDialog.Prompt("Enter input: ", "Say Something");
             if (message != null)
             {
                 string[] contexts = new string[] { OpenAIKey.Prelude, DefaultContent.Trim(), OpenAIKey.AdditionalContext.Trim() }
                     .Where(s => !string.IsNullOrWhiteSpace(s))
+                    .Concat(ConversationMessages)
                     .ToArray();
-                string contextualInput = string.Join(Environment.NewLine, contexts)
-                    + Environment.NewLine
-                    + $"Question: {message}";
+                string newMessage = $"Question: {message}";
+                string contextualInput = string.Join(Environment.NewLine, contexts) + Environment.NewLine
+                    + newMessage;
                 try
                 {
                     string reply = await CompletionHelpers.Complete(contextualInput.Trim());
-                    reply = Regex.Replace(reply, @"^[Rr]eply: ", string.Empty);
-                    DialoguePopUp.Show(reply, new System.Numerics.Vector2((float)Left, (float)Top));
+                    string displayReply = Regex.Replace(reply, @"^[Rr]eply: ", string.Empty);
+                    DialoguePopUp.Show(displayReply, new System.Numerics.Vector2((float)Left, (float)Top));
+
+                    ConversationMessages.Add(newMessage);
+                    ConversationMessages.Add($"Reply: {displayReply}");
+
+                    ConversationMessages = ConversationMessages.TakeLast(System.Math.Min(ConversationMessages.Count, 10)).ToList(); // Remark-cz: Keep input tokens amount reasonable by only keep last 10 conversations in memory
                 }
                 catch (Exception e)
                 {
