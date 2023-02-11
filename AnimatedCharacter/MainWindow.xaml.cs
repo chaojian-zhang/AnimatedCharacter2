@@ -16,11 +16,18 @@ namespace AnimatedCharacter
     public partial class MainWindow : Window
     {
         #region Default Context
-        public static string DefaultContent = """
+        /// <summary>
+        /// Provides basic self-identify and current world/time relevancy
+        /// </summary>
+        public static string DefaultContent = $"""
             Question: What's your name?
             Reply: My name is Miku.
             Question: What do you like?
             Reply: I like hiking.
+            Question: What's current date?
+            Reply: {DateTime.Now.ToLongDateString()}
+            Question: What day is it today?
+            Reply: {DateTime.Now.DayOfWeek}
             """;
         #endregion
 
