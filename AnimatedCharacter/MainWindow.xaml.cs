@@ -30,7 +30,7 @@ namespace AnimatedCharacter
             InitializeComponent();
             InitializeAnimations();
 
-            DelayedHelper.DoDelay(2, () => DialoguePopUp.Show("Hi, how are you?", new System.Numerics.Vector2((float)Left, (float)Top)));
+            DelayedHelper.DoDelay(2, () => DialoguePopUp.Show("Hi, how are you?\n(Reight-click on me to make a reply.)", new System.Numerics.Vector2((float)Left, (float)Top)));
         }
         public void InitializeAnimations()
         {
