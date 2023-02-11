@@ -13,7 +13,7 @@ namespace AnimatedCharacter.PopUps
             Text.Text = content;
 
             int textLength = content.Length;
-            double duration = TextShowUpTimes.First(t => t.TextLength >= textLength).Duration;
+            double duration = TextShowUpTimes.FirstOrDefault(t => t.TextLength >= textLength).Duration;
             DelayedHelper.DoDelay(duration, Close);
         }
         #endregion
@@ -30,6 +30,7 @@ namespace AnimatedCharacter.PopUps
             (220, 10),
             (250, 12),
             (300, 15),
+            (int.MaxValue, 15)
         };
         #endregion
 

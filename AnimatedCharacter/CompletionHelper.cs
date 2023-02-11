@@ -14,7 +14,7 @@ namespace AnimatedCharacter
         {
             ApiKey = OpenAIKey.Key
         });
-        public static async Task<string> Complete(string input, string model = null, int maxTokens = 256, float temperature = 0.5f)
+        public static async Task<string> Complete(string input, string model = null, int maxTokens = 400, float temperature = 0.5f)
         {            
             var completionResult = await OpenAiService.Completions.CreateCompletion(new CompletionCreateRequest()
             {

@@ -135,7 +135,7 @@ namespace AnimatedCharacter
         #endregion
 
         #region Event Management
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
@@ -145,7 +145,7 @@ namespace AnimatedCharacter
                 this.DragMove();
             else if (e.RightButton == MouseButtonState.Pressed)
             {
-                string message = PromptDialog.Prompt("Enter input: ", "Say Something");
+                string message = PromptDialog.Prompt("Enter what you want to say: ", "Say Something😆");
                 await HandleInputMessage(message);
             }
         }

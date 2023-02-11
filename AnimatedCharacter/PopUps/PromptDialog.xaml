@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AnimatedCharacter.PopUps"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight"
-        MinWidth="300" MinHeight="100"
+        MinWidth="300" MinHeight="100" MaxWidth="650"
         WindowStyle="SingleBorderWindow" Topmost="True" ShowInTaskbar="False" ResizeMode="CanMinimize">
     <Window.Resources>
         <Style TargetType="Button">
@@ -15,7 +15,7 @@
     </Window.Resources>
     <StackPanel Margin="5">
         <TextBlock Name="QuestionText" Margin="5"/>
-        <TextBox Name="GeneralTextResponse" Margin="5"/>
+        <TextBox Name="GeneralTextResponse" Margin="5" TextWrapping="Wrap"/>
         <PasswordBox Name="PasswordTextResponse" />
         <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Right">
             <Button Content="_Ok" IsDefault="True" Margin="5" Name="OkButton" Click="OkButton_Click" />
