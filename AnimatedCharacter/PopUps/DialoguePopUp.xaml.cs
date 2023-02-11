@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System.Linq;
+using System.Numerics;
 using System.Windows;
 
 namespace AnimatedCharacter.PopUps
@@ -11,8 +12,25 @@ namespace AnimatedCharacter.PopUps
             InitializeComponent();
             Text.Text = content;
 
-            DelayedHelper.DoDelay(2, Close);
+            int textLength = content.Length;
+            double duration = TextShowUpTimes.First(t => t.TextLength >= textLength).Duration;
+            DelayedHelper.DoDelay(duration, Close);
         }
+        #endregion
+
+        #region Delay Counters
+        private (int TextLength, double Duration)[] TextShowUpTimes = new (int TextLength, double Duration)[]
+        {
+            (30, 2),
+            (60, 3),
+            (90, 4.5),
+            (120, 6),
+            (150, 7),
+            (190, 8),
+            (220, 10),
+            (250, 12),
+            (300, 15),
+        };
         #endregion
 
         #region Interface Method

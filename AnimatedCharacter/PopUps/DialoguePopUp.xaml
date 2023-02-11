@@ -9,7 +9,8 @@
         AllowsTransparency="True" WindowStyle="None" Topmost="True" ResizeMode="NoResize"
         Background="{x:Null}" ShowInTaskbar="False">
     <Grid>
-        <Ellipse Fill="AliceBlue" StrokeThickness="1" Stroke="Black"/>
+        <Border Background="AliceBlue" CornerRadius="10"
+                BorderThickness="1" BorderBrush="Black"/>
         <TextBlock Name="Text" 
                    HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"
                    Margin="20 10">
