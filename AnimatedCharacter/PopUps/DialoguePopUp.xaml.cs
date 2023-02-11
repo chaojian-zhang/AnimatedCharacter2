@@ -21,12 +21,12 @@ namespace AnimatedCharacter.PopUps
         #region Delay Counters
         private (int TextLength, double Duration)[] TextShowUpTimes = new (int TextLength, double Duration)[]
         {
-            (30, 2),
-            (60, 3),
-            (90, 4.5),
-            (120, 6),
-            (150, 7),
-            (190, 8),
+            (30, 3),
+            (60, 5),
+            (90, 6.5),
+            (120, 7.5),
+            (150, 8.5),
+            (190, 9),
             (220, 10),
             (250, 12),
             (300, 15),
