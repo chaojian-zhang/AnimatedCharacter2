@@ -20,13 +20,13 @@ namespace AnimatedCharacter
         /// Provides basic self-identify and current world/time relevancy
         /// </summary>
         public static string DefaultContent = $"""
-            Question: What's your name?
+            Speaker: What's your name?
             Reply: My name is Miku.
-            Question: What do you like?
+            Speaker: What do you like?
             Reply: I like hiking.
-            Question: What's current date?
+            Speaker: What's current date?
             Reply: {DateTime.Now.ToLongDateString()}
-            Question: What day is it today?
+            Speaker: What day is it today?
             Reply: {DateTime.Now.DayOfWeek}
             """;
         #endregion
@@ -198,7 +198,7 @@ namespace AnimatedCharacter
                     .Where(s => !string.IsNullOrWhiteSpace(s))
                     .Concat(ConversationMessages.TakeLast(System.Math.Min(ConversationMessages.Count, 10))) // Remark-cz: Keep input tokens amount reasonable by only keep last 10 conversations in memory
                     .ToArray();
-                string newMessage = $"Question: {message}";
+                string newMessage = $"Speaker: {message}";
                 string contextualInput = string.Join(Environment.NewLine, contexts) + Environment.NewLine
                     + newMessage;
                 try
