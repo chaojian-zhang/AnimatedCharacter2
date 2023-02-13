@@ -30,6 +30,7 @@
   <ItemGroup>
     <PackageReference Include="Betalgo.OpenAI.GPT3" Version="6.6.7" />
     <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+    <PackageReference Include="YamlDotNet" Version="13.0.0" />
   </ItemGroup>
 
 </Project>

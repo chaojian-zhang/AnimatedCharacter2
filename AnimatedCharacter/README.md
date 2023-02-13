@@ -15,3 +15,7 @@ namespace AnimatedCharacter
     }
 }
 ```
+
+## Advanced Animations
+
+To avoid complexity with DSL and since we are building from source anyway. Animation states, transfer, and presets will be created directly throug OOP paradigm.
