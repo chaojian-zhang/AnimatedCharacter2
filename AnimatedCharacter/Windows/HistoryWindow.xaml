@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AnimatedCharacter.Windows"
         mc:Ignorable="d"
-        Title="HistoryWindow" MinHeight="450" MinWidth="300" SizeToContent="WidthAndHeight"
+        Title="HistoryWindow" 
+        MinHeight="450" MinWidth="300" MaxWidth="650"
+        SizeToContent="WidthAndHeight"
         DataContext="{Binding RelativeSource={RelativeSource self}}">
-    <TextBox Text="{Binding ChatHistory}" IsReadOnly="True"/>
+    <TextBox Text="{Binding ChatHistory}" IsReadOnly="True" TextWrapping="WrapWithOverflow" VerticalScrollBarVisibility="Auto"/>
 </Window>

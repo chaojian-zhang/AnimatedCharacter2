@@ -14,7 +14,8 @@ namespace AnimatedCharacter.Windows
         public HistoryWindow()
         {
             MainWindow mainWindow = App.Current.MainWindow as MainWindow;
-            ChatHistory = string.Join(Environment.NewLine, mainWindow.ConversationMessages.Select(m => Regex.Replace(m, "^((Reply)|(Speaker)): ", string.Empty)));
+            ChatHistory = string.Join(Environment.NewLine, mainWindow.ConversationMessages
+                .Select(m => Regex.Replace(m, "^Reply: ", "Miku: ")));
 
             InitializeComponent();
         }
