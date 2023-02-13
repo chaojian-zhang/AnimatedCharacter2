@@ -14,7 +14,10 @@
         </Style>
     </Window.Resources>
     <StackPanel Margin="5">
-        <TextBlock Name="QuestionText" Margin="5"/>
+        <DockPanel LastChildFill="True">
+            <TextBlock DockPanel.Dock="Right" Name="HistoryButton" FontStyle="Italic" Text="History" TextDecorations="Underline" VerticalAlignment="Center" Foreground="CadetBlue" MouseDown="PreviewTextBlock_MouseDown"/>
+            <TextBlock Name="QuestionText" Margin="5"/>
+        </DockPanel>
         <TextBox Name="GeneralTextResponse" Margin="5" TextWrapping="Wrap"/>
         <PasswordBox Name="PasswordTextResponse" />
         <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Right">

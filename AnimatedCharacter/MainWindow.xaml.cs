@@ -88,7 +88,7 @@ namespace AnimatedCharacter
         #endregion
 
         #region Properties
-        public List<string> ConversationMessages = new List<string>();
+        public List<string> ConversationMessages = new();
         #endregion
 
         #region Helpers
@@ -196,7 +196,7 @@ namespace AnimatedCharacter
             {
                 string[] contexts = new string[] { OpenAIKey.Prelude, DefaultContent.Trim(), OpenAIKey.AdditionalContext.Trim() }
                     .Where(s => !string.IsNullOrWhiteSpace(s))
-                    .Concat(ConversationMessages)
+                    .Concat(ConversationMessages.TakeLast(System.Math.Min(ConversationMessages.Count, 10))) // Remark-cz: Keep input tokens amount reasonable by only keep last 10 conversations in memory
                     .ToArray();
                 string newMessage = $"Question: {message}";
                 string contextualInput = string.Join(Environment.NewLine, contexts) + Environment.NewLine
@@ -209,8 +209,6 @@ namespace AnimatedCharacter
 
                     ConversationMessages.Add(newMessage);
                     ConversationMessages.Add($"Reply: {displayReply}");
-
-                    ConversationMessages = ConversationMessages.TakeLast(System.Math.Min(ConversationMessages.Count, 10)).ToList(); // Remark-cz: Keep input tokens amount reasonable by only keep last 10 conversations in memory
                 }
                 catch (Exception e)
                 {

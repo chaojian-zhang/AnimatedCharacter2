@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using AnimatedCharacter.Windows;
+using System.Windows;
 
 namespace AnimatedCharacter.PopUps
 {
@@ -18,6 +19,7 @@ namespace AnimatedCharacter.PopUps
             QuestionText.Text = question;
             Title = title;
             GeneralTextResponse.Text = defaultValue;
+            HistoryButton.Visibility = (App.Current.MainWindow as MainWindow).ConversationMessages.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
 
             _InputType = inputType;
             if (_InputType == InputType.Password)
@@ -70,6 +72,11 @@ namespace AnimatedCharacter.PopUps
         {
             Close();
         }
+        private void PreviewTextBlock_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            new HistoryWindow().Show();
+            Close();
+        }
         #endregion
 
         #region Interface Method
@@ -84,6 +91,6 @@ namespace AnimatedCharacter.PopUps
                 return inst.ResponseText;
             return null;
         }
-        #endregion     
+        #endregion
     }
 }

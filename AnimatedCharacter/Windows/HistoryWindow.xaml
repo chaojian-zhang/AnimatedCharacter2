@@ -1,0 +1,11 @@
+﻿<Window x:Class="AnimatedCharacter.Windows.HistoryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AnimatedCharacter.Windows"
+        mc:Ignorable="d"
+        Title="HistoryWindow" MinHeight="450" MinWidth="300" SizeToContent="WidthAndHeight"
+        DataContext="{Binding RelativeSource={RelativeSource self}}">
+    <TextBox Text="{Binding ChatHistory}" IsReadOnly="True"/>
+</Window>
