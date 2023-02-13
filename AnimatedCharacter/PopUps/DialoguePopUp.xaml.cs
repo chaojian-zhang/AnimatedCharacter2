@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using AnimatedCharacter.Windows;
+using System.Linq;
 using System.Numerics;
 using System.Windows;
 
@@ -34,6 +35,14 @@ namespace AnimatedCharacter.PopUps
             (2000, 450), // Roughly 400 words in English
             (int.MaxValue, 15)
         };
+        #endregion
+
+        #region Events
+        private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            new HistoryWindow().Show();
+            Close();
+        }
         #endregion
 
         #region Interface Method
