@@ -19,6 +19,7 @@ namespace PromptBox
                 sb.AppendLine(history.Input);
                 sb.AppendLine();
                 sb.AppendLine(history.Output);
+                sb.AppendLine();
             }
             return sb.ToString();
         }
