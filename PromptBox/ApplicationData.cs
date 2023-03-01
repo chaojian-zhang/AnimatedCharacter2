@@ -16,9 +16,9 @@ namespace PromptBox
             {
                 sb.AppendLine($"# {history.Time:yyyy-MM-dd hh:mm:ss}");
                 sb.AppendLine();
-                sb.AppendLine(history.Input);
+                sb.AppendLine(history.Input.Trim());
                 sb.AppendLine();
-                sb.AppendLine(history.Output);
+                sb.AppendLine(history.Output.Trim());
                 sb.AppendLine();
             }
             return sb.ToString();

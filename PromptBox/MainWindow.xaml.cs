@@ -39,7 +39,7 @@ namespace PromptBox
                 string reply = completionResult.Choices.FirstOrDefault()?.Text;
                 if (!string.IsNullOrEmpty(reply))
                     Result.Text = reply.Trim();
-                HistoryManager.AddHistory(new History(input, reply, DateTime.Now));
+                HistoryManager.AddHistory(new History(input.Trim(), reply.Trim(), DateTime.Now));
             }
             else
             {
