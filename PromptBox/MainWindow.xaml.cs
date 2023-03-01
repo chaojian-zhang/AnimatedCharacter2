@@ -2,6 +2,7 @@
 using OpenAI.GPT3.Managers;
 using OpenAI.GPT3.ObjectModels;
 using OpenAI.GPT3.ObjectModels.RequestModels;
+using System;
 using System.Linq;
 using System.Windows;
 
@@ -22,8 +23,7 @@ namespace PromptBox
 
         private async void SendButton_Click(object sender, RoutedEventArgs e)
         {
-            string input = Input.Text; 
-            Input.Text = string.Empty;
+            string input = Input.Text;
             Result.Text = "Loading...";
 
             var completionResult = await OpenAiService.Completions.CreateCompletion(new CompletionCreateRequest()
@@ -39,6 +39,7 @@ namespace PromptBox
                 string reply = completionResult.Choices.FirstOrDefault()?.Text;
                 if (!string.IsNullOrEmpty(reply))
                     Result.Text = reply.Trim();
+                HistoryManager.AddHistory(new History(input, reply, DateTime.Now));
             }
             else
             {
@@ -46,6 +47,11 @@ namespace PromptBox
                     Result.Text = "Unknown Error";
                 Result.Text = $"{completionResult.Error.Code}: {completionResult.Error.Message}";
             }
+        }
+
+        private void ViewHistoryFileMenu_Click(object sender, RoutedEventArgs e)
+        {
+            new HistoryWindow().Show();
         }
     }
 }

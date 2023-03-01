@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Title="PromptBox" Height="450" Width="800">
     <DockPanel LastChildFill="True">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="History" Click="ViewHistoryFileMenu_Click"/>
+            </MenuItem>
+        </Menu>
         <Label DockPanel.Dock="Top"  Content="Input"/>
         <TextBox DockPanel.Dock="Top" MinWidth="250" MinHeight="150" Name="Input" AcceptsReturn="True" AcceptsTab="True"></TextBox>
         <Button DockPanel.Dock="Top" Content="Send" Click="SendButton_Click" Margin="3"/>
