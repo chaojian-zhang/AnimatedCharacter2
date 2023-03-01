@@ -364,3 +364,4 @@ FodyWeavers.xsd
 
 AnimatedCharacter/OpenAIKey.cs
 launchSettings.json
+PromptBox/OpenAIKey.cs
