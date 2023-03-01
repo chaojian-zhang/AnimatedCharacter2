@@ -9,8 +9,8 @@ namespace PromptBox
     {
         public HistoryWindow()
         {
-            HistoryText.Text = HistoryManager.GetHistory().ToMarkdown();
             InitializeComponent();
+            HistoryText.Text = HistoryManager.GetHistory().ToMarkdown();
         }
     }
 }
